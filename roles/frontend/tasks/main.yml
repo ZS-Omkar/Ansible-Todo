@@ -3,10 +3,12 @@
     name: nginx
     update_cache: yes
     state: present
+
 - name: Install nodejs
   apt:
     name: nodejs
     state: present
+
 - name: Install npm
   apt:
     name: npm
@@ -26,9 +28,9 @@
     path: /var/www/html/vue
     state: directory
 
-- name: create frontend directory
+- name: create {{COMPONENT}} directory
   file:
-    path: /var/www/html/vue/frontend
+    path: /var/www/html/vue/{{COMPONENT}}
     state: directory
 
 - name: Import artifacts
@@ -38,8 +40,8 @@
 
 - name: unzip the downloaded content
   unarchive:
-    src: /tmp/frontend.zip
-    dest: /var/www/html/vue/frontend
+    src: /tmp/{{COMPONENT}}.zip
+    dest: /var/www/html/vue/{{COMPONENT}}
     remote_src: yes
 
 - name: Update Todo config file
