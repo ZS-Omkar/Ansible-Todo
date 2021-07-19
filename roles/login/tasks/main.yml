@@ -1,0 +1,35 @@
+- name: Install go-lang
+  apt:
+    name: golang
+    update_cache: yes
+    state: present
+
+- name: Create a directory
+  file:
+    path: /root/go/src/login
+    state: directory
+
+- name: Download Artifacts from Nexus
+  get_url:
+    url: http://34.201.27.100:8081/repository/login/login-{{APP_VERSION}}.zip
+    dest: /tmp/login.zip
+    username: admin
+    password: Omkar@123
+
+- name: Unarchive the downloaded content
+  unarchive:
+    src: /tmp/login.zip
+    dest: /root/go/src/login
+    remote_src: yes
+
+- name: copy the service file
+  template:
+    src: "login.service"
+    dest: /etc/systemd/system/login.service
+
+- name: Start service
+  systemd:
+    name: login
+    daemon_reload: yes
+    state: started
+    enabled: yes

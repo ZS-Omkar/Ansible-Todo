@@ -1,0 +1,56 @@
+- name: Install Nginx
+  apt:
+    name: nginx
+    update_cache: yes
+    state: present
+- name: Install nodejs
+  apt:
+    name: nodejs
+    state: present
+- name: Install npm
+  apt:
+    name: npm
+    state: present
+
+- name: Removing default files
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/nginx/sites-available/default
+    - /etc/nginx/sites-enabled/default
+    - /var/www/html/index.nginx-debian.html
+
+- name: create a vue directory
+  file:
+    path: /var/www/html/vue
+    state: directory
+
+- name: create frontend directory
+  file:
+    path: /var/www/html/vue/frontend
+    state: directory
+
+- name: Download Artifacts from Nexus
+  get_url:
+    url: http://34.201.27.100:8081/repository/frontend/frontend-{{APP_VERSION}}.zip
+    dest: /tmp/frontend.zip
+    username: admin
+    password: Omkar@123
+
+- name: unzip the downloaded content
+  unarchive:
+    src: /tmp/frontend.zip
+    dest: /var/www/html/vue/frontend
+    remote_src: yes
+
+- name: Update Todo config file
+  template:
+    src: default.config
+    dest: /etc/nginx/sites-enabled/default.config
+
+- name: Start service
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
