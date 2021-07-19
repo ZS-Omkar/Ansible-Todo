@@ -6,7 +6,7 @@
 
 - name: Create a directory
   file:
-    path: /root/go/src/login
+    path: /root/go/src/{{COMPONENT}}
     state: directory
 
 - name: Import artifacts
@@ -16,18 +16,18 @@
 
 - name: Unarchive the downloaded content
   unarchive:
-    src: /tmp/login.zip
-    dest: /root/go/src/login
+    src: /tmp/{{COMPONENT}}.zip
+    dest: /root/go/src/{{COMPONENT}}
     remote_src: yes
 
 - name: copy the service file
   template:
-    src: "login.service"
-    dest: /etc/systemd/system/login.service
+    src: "{{COMPONENT}}.service"
+    dest: /etc/systemd/system/{{COMPONENT}}.service
 
 - name: Start service
   systemd:
-    name: login
+    name: {{COMPONENT}}
     daemon_reload: yes
     state: started
     enabled: yes
