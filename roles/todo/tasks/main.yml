@@ -32,7 +32,7 @@
 
 - name: Start service
   systemd:
-    name: {{COMPONENT}}
+    name: "{{COMPONENT}}"
     daemon-reload: yes
     state: started
     enabled: yes
