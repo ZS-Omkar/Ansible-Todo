@@ -27,7 +27,7 @@
 
 - name: Start service
   systemd:
-    name: {{COMPONENT}}
+    name: users
     daemon_reload: yes
     state: started
     enabled: yes
