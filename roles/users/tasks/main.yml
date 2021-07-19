@@ -4,12 +4,10 @@
     update_cache: yes
     state: present
 
-- name: Download Artifacts from Nexus
-  get_url:
-    url: http://34.201.27.100:8081/repository/users/users-{{APP_VERSION}}.zip
-    dest: /tmp/users.zip
-    username: admin
-    password: Omkar@123
+- name: Import artifacts
+  include_role:
+    name: common
+    tasks_from: download-artifacts.yml
 
 - name: Create a directory
   file:
