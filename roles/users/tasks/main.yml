@@ -11,23 +11,23 @@
 
 - name: Create a directory
   file:
-    path: /root/users
+    path: /root/{{COMPONENT}}
     state: directory
 
 - name: unzip the downloaded content
   unarchive:
-    src: /tmp/users.zip
-    dest: /root/users
+    src: /tmp/{{COMPONENT}}.zip
+    dest: /root/{{COMPONENT}}
     remote_src: yes
 
 - name: copy the service file
   template:
-    src: "users.service"
-    dest: /etc/systemd/system/users.service
+    src: "{{COMPONENT}}.service"
+    dest: /etc/systemd/system/{{COMPONENT}}.service
 
 - name: Start service
   systemd:
-    name: users
+    name: {{COMPONENT}}
     daemon_reload: yes
     state: started
     enabled: yes
