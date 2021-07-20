@@ -20,15 +20,6 @@
     dest: /root/{{COMPONENT}}
     remote_src: yes
 
-- name: copy the service file
-  template:
-    src: "{{COMPONENT}}.service"
-    dest: /etc/systemd/system/{{COMPONENT}}.service
-
-- name: Start service
-  systemd:
-    name: "{{COMPONENT}}"
-    daemon_reload: yes
-    state: started
-    enabled: yes
+- name: copy and start the service
+  include_tasks: systemD.yml
 

@@ -1,0 +1,11 @@
+- name: copy the service file
+  template:
+    src: "{{COMPONENT}}.service"
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Start service
+  systemd:
+    name: "{{COMPONENT}}"
+    daemon-reload: yes
+    state: started
+    enabled: yes
