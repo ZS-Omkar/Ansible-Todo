@@ -48,6 +48,7 @@
   template:
     src: default.config
     dest: /etc/nginx/sites-enabled/default.config
+  notify: Restart Nginx
 
 - name: Start service
   systemd:
