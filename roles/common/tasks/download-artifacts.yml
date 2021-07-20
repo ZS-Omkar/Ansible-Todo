@@ -1,6 +1,6 @@
 - name: Download Artifacts from Nexus
   get_url:
-    url: http://3.239.255.114:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    url: http://100.27.15.5:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
     dest: /tmp/{{COMPONENT}}.zip
     username: admin
     password: Omkar@123
