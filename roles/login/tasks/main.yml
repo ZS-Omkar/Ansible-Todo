@@ -1,26 +1,4 @@
-- name: Install go-lang
-  apt:
-    name: golang
-    update_cache: yes
-    state: present
-
-- name: Create a directory
-  file:
-    path: /root/go/src/{{COMPONENT}}
-    state: directory
-
-- name: Import artifacts
+- name: Import GO from common role
   include_role:
     name: common
-    tasks_from: download-artifacts.yml
-
-- name: Unarchive the downloaded content
-  unarchive:
-    src: /tmp/{{COMPONENT}}.zip
-    dest: /root/go/src/{{COMPONENT}}
-    remote_src: yes
-
-- name: copy and start the service
-  include_role:
-    name: common
-    tasks_from: systemD.yml
+    tasks_from: golang.yml
