@@ -10,8 +10,11 @@
     tasks_from: download-artifacts.yml
 
 - name: create directory and unzip the content
-  include_tasks: unzip.yml
+  include_role:
+    name: common
+    tasks_from: unzip.yml
 
 - name: copy and start the service
-  include_tasks: systemD.yml
-
+  include_role:
+    name: common
+    tasks_from: systemD.yml
