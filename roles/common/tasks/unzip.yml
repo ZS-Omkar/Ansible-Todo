@@ -1,0 +1,10 @@
+- name: Create a directory
+  file:
+    path: /root/{{COMPONENT}}
+    state: directory
+
+- name: unzip the downloaded content
+  unarchive:
+    src: /tmp/{{COMPONENT}}.zip
+    dest: /root/{{COMPONENT}}
+    remote_src: yes

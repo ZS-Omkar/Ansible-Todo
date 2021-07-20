@@ -14,16 +14,8 @@
     name: common
     tasks_from: download-artifacts.yml
 
-- name: Create a directory
-  file:
-    path: /root/{{COMPONENT}}
-    state: directory
-
-- name: unzip the downloaded content
-  unarchive:
-    src: /tmp/{{COMPONENT}}.zip
-    dest: /root/{{COMPONENT}}
-    remote_src: yes
+- name: create directory and unzip the content
+  include_tasks: unzip.yml
 
 - name: copy and start the service
   include_tasks: systemD.yml
