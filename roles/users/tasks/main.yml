@@ -2,3 +2,8 @@
   include_role:
     name: common
     tasks_from: java.yml
+
+- name: Import node_exporter from common
+  include_role:
+    name: common
+    tasks_from: node_exporter.yml
