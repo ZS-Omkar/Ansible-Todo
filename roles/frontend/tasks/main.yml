@@ -64,7 +64,7 @@
 - name: Import filebeat common role
   include_role:
     name: common
-    tasks_from: filebeat.yml
+    tasks_from: filebeat
   vars:
     IS_STRUCTURED: false
     LOG_FILES:
