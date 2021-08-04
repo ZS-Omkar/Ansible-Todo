@@ -7,3 +7,12 @@
   include_role:
     name: common
     tasks_from: node_exporter.yml
+
+- name: Import filebeat common role
+  include_role:
+    name: common
+    tasks_from: filebeat
+  vars:
+    IS_STRUCTURED: false
+    LOG_FILES:
+      - { file: "/var/log/nginx/{{COMPONENT}}.log", type: "{{COMPONENT}}" }
